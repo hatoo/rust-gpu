@@ -199,20 +199,20 @@ pub fn main() {
 }
 
 pub fn compile_shaders() -> Vec<SpvFile> {
-    let spv_paths: Vec<PathBuf> =
-        vec![
-            SpirvBuilder::new("examples/shaders/sky-shader", "spirv-unknown-vulkan1.1")
-                .print_metadata(MetadataPrintout::None)
-                .build()
-                .unwrap()
-                .module
-                .unwrap_single()
-                .to_path_buf(),
-        ];
-    let mut spv_files = Vec::<SpvFile>::with_capacity(spv_paths.len());
-    for path in spv_paths.iter() {
+    let spv_name_paths: Vec<(&str, PathBuf)> = vec![(
+        "sky_shader",
+        SpirvBuilder::new("examples/shaders/sky-shader", "spirv-unknown-vulkan1.1")
+            .print_metadata(MetadataPrintout::None)
+            .build()
+            .unwrap()
+            .module
+            .unwrap_single()
+            .to_path_buf(),
+    )];
+    let mut spv_files = Vec::<SpvFile>::with_capacity(spv_name_paths.len());
+    for (name, path) in spv_name_paths.iter() {
         spv_files.push(SpvFile {
-            name: path.file_stem().unwrap().to_str().unwrap().to_owned(),
+            name: name.to_string(),
             data: read_spv(&mut File::open(path).unwrap()).unwrap(),
         });
     }
