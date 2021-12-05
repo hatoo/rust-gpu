@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `crates&#x2F;rustc_codegen_spirv&#x2F;src&#x2F;lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../rustc_codegen_spirv/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `crates&#x2F;rustc_codegen_spirv&#x2F;src&#x2F;lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../rustc_codegen_spirv/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -635,38 +635,7 @@
 <span id="635">635</span>
 <span id="636">636</span>
 <span id="637">637</span>
-<span id="638">638</span>
-<span id="639">639</span>
-<span id="640">640</span>
-<span id="641">641</span>
-<span id="642">642</span>
-<span id="643">643</span>
-<span id="644">644</span>
-<span id="645">645</span>
-<span id="646">646</span>
-<span id="647">647</span>
-<span id="648">648</span>
-<span id="649">649</span>
-<span id="650">650</span>
-<span id="651">651</span>
-<span id="652">652</span>
-<span id="653">653</span>
-<span id="654">654</span>
-<span id="655">655</span>
-<span id="656">656</span>
-<span id="657">657</span>
-<span id="658">658</span>
-<span id="659">659</span>
-<span id="660">660</span>
-<span id="661">661</span>
-<span id="662">662</span>
-<span id="663">663</span>
-<span id="664">664</span>
-<span id="665">665</span>
-<span id="666">666</span>
-<span id="667">667</span>
-</pre><pre class="rust">
-<span class="doccomment">//! Welcome to the API documentation for the `rust-gpu` project, this API is</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Welcome to the API documentation for the `rust-gpu` project, this API is</span>
 <span class="doccomment">//! unstable and mainly intended for developing on the project itself. This is</span>
 <span class="doccomment">//! the API documentation for `rustc_codegen_spirv` which is not that useful on</span>
 <span class="doccomment">//! its own. You might also be interested in the following crates. There&#39;s also</span>
@@ -785,16 +754,16 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rustc_hir</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rustc_index</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rustc_interface</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rustc_metadata</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rustc_middle</span>;
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rustc_mir</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rustc_session</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rustc_span</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rustc_target</span>;
 
 <span class="macro">macro_rules!</span> <span class="ident">assert_ty_eq</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">codegen_cx</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">codegen_cx</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>:<span class="ident">expr</span>) =&gt; {
         <span class="macro">assert!</span>(
-            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span> <span class="op">=</span><span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>,
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span> <span class="op">==</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>,
             <span class="string">&quot;Expected types to be equal:\n{}\n==\n{}&quot;</span>,
             <span class="macro-nonterminal">$</span><span class="macro-nonterminal">codegen_cx</span>.<span class="ident">debug_type</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>),
             <span class="macro-nonterminal">$</span><span class="macro-nonterminal">codegen_cx</span>.<span class="ident">debug_type</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>)
@@ -836,16 +805,15 @@
 <span class="kw">use</span> <span class="ident">rustc_codegen_ssa</span>::{<span class="ident">CodegenResults</span>, <span class="ident">CompiledModule</span>, <span class="ident">ModuleCodegen</span>, <span class="ident">ModuleKind</span>};
 <span class="kw">use</span> <span class="ident">rustc_data_structures::fx::FxHashMap</span>;
 <span class="kw">use</span> <span class="ident">rustc_errors</span>::{<span class="ident">ErrorReported</span>, <span class="ident">FatalError</span>, <span class="ident">Handler</span>};
+<span class="kw">use</span> <span class="ident">rustc_metadata::EncodedMetadata</span>;
 <span class="kw">use</span> <span class="ident">rustc_middle::dep_graph</span>::{<span class="ident">WorkProduct</span>, <span class="ident">WorkProductId</span>};
-<span class="kw">use</span> <span class="ident">rustc_middle::middle::cstore::EncodedMetadata</span>;
 <span class="kw">use</span> <span class="ident">rustc_middle::mir::mono</span>::{<span class="ident">Linkage</span>, <span class="ident">MonoItem</span>, <span class="ident">Visibility</span>};
+<span class="kw">use</span> <span class="ident">rustc_middle::mir::pretty::write_mir_pretty</span>;
 <span class="kw">use</span> <span class="ident">rustc_middle::ty::print::with_no_trimmed_paths</span>;
 <span class="kw">use</span> <span class="ident">rustc_middle::ty</span>::{<span class="self">self</span>, <span class="ident">query</span>, <span class="ident">DefIdTree</span>, <span class="ident">Instance</span>, <span class="ident">InstanceDef</span>, <span class="ident">TyCtxt</span>};
-<span class="kw">use</span> <span class="ident">rustc_mir::util::write_mir_pretty</span>;
 <span class="kw">use</span> <span class="ident">rustc_session::config</span>::{<span class="self">self</span>, <span class="ident">OptLevel</span>, <span class="ident">OutputFilenames</span>, <span class="ident">OutputType</span>};
 <span class="kw">use</span> <span class="ident">rustc_session::Session</span>;
 <span class="kw">use</span> <span class="ident">rustc_span::symbol</span>::{<span class="ident">sym</span>, <span class="ident">Symbol</span>};
-<span class="kw">use</span> <span class="ident">rustc_target::spec::abi::Abi</span>;
 <span class="kw">use</span> <span class="ident">rustc_target::spec</span>::{<span class="ident">Target</span>, <span class="ident">TargetTriple</span>};
 <span class="kw">use</span> <span class="ident">std::any::Any</span>;
 <span class="kw">use</span> <span class="ident">std::env</span>;
@@ -878,27 +846,27 @@
     <span class="ident">tcx</span>: <span class="ident">TyCtxt</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
     <span class="ident">sym</span>: <span class="kw-2">&amp;</span><span class="ident">symbols::Symbols</span>,
     <span class="ident">instance</span>: <span class="ident">Instance</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+) -&gt; <span class="ident">bool</span> {
     <span class="comment">// TODO: These sometimes have a constant value of an enum variant with a hole</span>
     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">InstanceDef::Item</span>(<span class="ident">def</span>) <span class="op">=</span> <span class="ident">instance</span>.<span class="ident">def</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">debug_trait_def_id</span>) <span class="op">=</span> <span class="ident">tcx</span>.<span class="ident">get_diagnostic_item</span>(<span class="ident">sym::debug_trait</span>) {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">debug_trait_def_id</span>) <span class="op">=</span> <span class="ident">tcx</span>.<span class="ident">get_diagnostic_item</span>(<span class="ident">sym::Debug</span>) {
             <span class="comment">// Helper for detecting `&lt;_ as core::fmt::Debug&gt;::fmt` (in impls).</span>
             <span class="kw">let</span> <span class="ident">is_debug_fmt_method</span> <span class="op">=</span> <span class="op">|</span><span class="ident">def_id</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">tcx</span>.<span class="ident">opt_associated_item</span>(<span class="ident">def_id</span>) {
-                <span class="prelude-val">Some</span>(<span class="ident">assoc</span>) <span class="kw">if</span> <span class="ident">assoc</span>.<span class="ident">ident</span>.<span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="ident">sym::fmt</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">assoc</span>.<span class="ident">container</span> {
-                    <span class="ident">ty::ImplContainer</span>(<span class="ident">impl_def_id</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">assoc</span>) <span class="kw">if</span> <span class="ident">assoc</span>.<span class="ident">ident</span>.<span class="ident">name</span> <span class="op">==</span> <span class="ident">sym::fmt</span> =&gt; <span class="kw">match</span> <span class="ident">assoc</span>.<span class="ident">container</span> {
+                    <span class="ident">ty::ImplContainer</span>(<span class="ident">impl_def_id</span>) =&gt; {
                         <span class="ident">tcx</span>.<span class="ident">impl_trait_ref</span>(<span class="ident">impl_def_id</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">tr</span><span class="op">|</span> <span class="ident">tr</span>.<span class="ident">def_id</span>)
-                            <span class="op">=</span><span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">debug_trait_def_id</span>)
+                            <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="ident">debug_trait_def_id</span>)
                     }
-                    <span class="ident">ty::TraitContainer</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+                    <span class="ident">ty::TraitContainer</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">false</span>,
                 },
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+                <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
             };
 
             <span class="kw">if</span> <span class="ident">is_debug_fmt_method</span>(<span class="ident">def</span>.<span class="ident">did</span>) {
                 <span class="kw">return</span> <span class="bool-val">true</span>;
             }
 
-            <span class="kw">if</span> <span class="ident">tcx</span>.<span class="ident">opt_item_name</span>(<span class="ident">def</span>.<span class="ident">did</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">i</span>.<span class="ident">name</span>) <span class="op">=</span><span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">sym</span>.<span class="ident">fmt_decimal</span>) {
+            <span class="kw">if</span> <span class="ident">tcx</span>.<span class="ident">opt_item_name</span>(<span class="ident">def</span>.<span class="ident">did</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">i</span>.<span class="ident">name</span>) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="ident">sym</span>.<span class="ident">fmt_decimal</span>) {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">parent_def_id</span>) <span class="op">=</span> <span class="ident">tcx</span>.<span class="ident">parent</span>(<span class="ident">def</span>.<span class="ident">did</span>) {
                     <span class="kw">if</span> <span class="ident">is_debug_fmt_method</span>(<span class="ident">parent_def_id</span>) {
                         <span class="kw">return</span> <span class="bool-val">true</span>;
@@ -915,7 +883,7 @@
 <span class="kw">struct</span> <span class="ident">SpirvModuleBuffer</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span> <span class="ident">ModuleBufferMethods</span> <span class="kw">for</span> <span class="ident">SpirvModuleBuffer</span> {
-    <span class="kw">fn</span> <span class="ident">data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
+    <span class="kw">fn</span> <span class="ident">data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
         <span class="ident">spirv_tools::binary::from_binary</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>)
     }
 }
@@ -924,7 +892,7 @@
 <span class="kw">struct</span> <span class="ident">SpirvThinBuffer</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span> <span class="ident">ThinBufferMethods</span> <span class="kw">for</span> <span class="ident">SpirvThinBuffer</span> {
-    <span class="kw">fn</span> <span class="ident">data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
+    <span class="kw">fn</span> <span class="ident">data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
         <span class="ident">spirv_tools::binary::from_binary</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>)
     }
 }
@@ -933,7 +901,7 @@
 <span class="kw">struct</span> <span class="ident">SpirvCodegenBackend</span>;
 
 <span class="kw">impl</span> <span class="ident">CodegenBackend</span> <span class="kw">for</span> <span class="ident">SpirvCodegenBackend</span> {
-    <span class="kw">fn</span> <span class="ident">target_features</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">sess</span>: <span class="kw-2">&amp;</span><span class="ident">Session</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Symbol</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">target_features</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">sess</span>: <span class="kw-2">&amp;</span><span class="ident">Session</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Symbol</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">cmdline</span> <span class="op">=</span> <span class="ident">sess</span>.<span class="ident">opts</span>.<span class="ident">cg</span>.<span class="ident">target_feature</span>.<span class="ident">split</span>(<span class="string">&#39;,&#39;</span>);
         <span class="kw">let</span> <span class="ident">cfg</span> <span class="op">=</span> <span class="ident">sess</span>.<span class="ident">target</span>.<span class="ident">options</span>.<span class="ident">features</span>.<span class="ident">split</span>(<span class="string">&#39;,&#39;</span>);
         <span class="ident">cfg</span>.<span class="ident">chain</span>(<span class="ident">cmdline</span>)
@@ -944,53 +912,23 @@
             .<span class="ident">collect</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">target_override</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">opts</span>: <span class="kw-2">&amp;</span><span class="ident">config::Options</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Target</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">target_override</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">opts</span>: <span class="kw-2">&amp;</span><span class="ident">config::Options</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Target</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">opts</span>.<span class="ident">target_triple</span> {
-            <span class="ident">TargetTriple::TargetTriple</span>(<span class="kw-2">ref</span> <span class="ident">target</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">target</span>
+            <span class="ident">TargetTriple::TargetTriple</span>(<span class="kw-2">ref</span> <span class="ident">target</span>) =&gt; <span class="ident">target</span>
                 .<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">target::SpirvTarget</span><span class="op">&gt;</span>()
                 .<span class="ident">map</span>(<span class="op">|</span><span class="ident">target</span><span class="op">|</span> <span class="ident">target</span>.<span class="ident">rustc_target</span>())
                 .<span class="ident">ok</span>(),
-            <span class="ident">TargetTriple::TargetPath</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="ident">TargetTriple::TargetPath</span>(<span class="kw">_</span>) =&gt; <span class="prelude-val">None</span>,
         }
     }
 
     <span class="kw">fn</span> <span class="ident">provide</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">providers</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">query::Providers</span>) {
-        <span class="comment">// This is a lil weird: so, we obviously don&#39;t support C ABIs at all. However, libcore does declare some extern</span>
-        <span class="comment">// C functions:</span>
-        <span class="comment">// https://github.com/rust-lang/rust/blob/5fae56971d8487088c0099c82c0a5ce1638b5f62/library/core/src/slice/cmp.rs#L119</span>
-        <span class="comment">// However, those functions will be implemented by compiler-builtins:</span>
-        <span class="comment">// https://github.com/rust-lang/rust/blob/5fae56971d8487088c0099c82c0a5ce1638b5f62/library/core/src/lib.rs#L23-L27</span>
-        <span class="comment">// This theoretically then should be fine to leave as C, but, there&#39;s no backend hook for</span>
-        <span class="comment">// FnAbi::adjust_for_cabi, causing it to panic:</span>
-        <span class="comment">// https://github.com/rust-lang/rust/blob/5fae56971d8487088c0099c82c0a5ce1638b5f62/compiler/rustc_target/src/abi/call/mod.rs#L603</span>
-        <span class="comment">// So, treat any extern &quot;C&quot; functions as actually being Rust ABI, to be able to compile libcore with arch=spirv.</span>
-        <span class="ident">providers</span>.<span class="ident">fn_sig</span> <span class="op">=</span> <span class="op">|</span><span class="ident">tcx</span>, <span class="ident">def_id</span><span class="op">|</span> {
-            <span class="comment">// We can&#39;t capture the old fn_sig and just call that, because fn_sig is a `fn`, not a `Fn`, i.e. it can&#39;t</span>
-            <span class="comment">// capture variables. Fortunately, the defaults are exposed (thanks rustdoc), so use that instead.</span>
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> (<span class="ident">rustc_interface::DEFAULT_QUERY_PROVIDERS</span>.<span class="ident">fn_sig</span>)(<span class="ident">tcx</span>, <span class="ident">def_id</span>);
-            <span class="ident">result</span>.<span class="ident">map_bound</span>(<span class="op">|</span><span class="kw-2">mut</span> <span class="ident">inner</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Abi::C</span> { .. } <span class="op">=</span> <span class="ident">inner</span>.<span class="ident">abi</span> {
-                    <span class="ident">inner</span>.<span class="ident">abi</span> <span class="op">=</span> <span class="ident">Abi::Rust</span>;
-                }
-                <span class="ident">inner</span>
-            })
-        };
-
-        <span class="comment">// Extra hooks provided by other parts of `rustc_codegen_spirv`.</span>
+        <span class="ident"><span class="kw">crate</span>::abi::provide</span>(<span class="ident">providers</span>);
         <span class="ident"><span class="kw">crate</span>::attr::provide</span>(<span class="ident">providers</span>);
     }
 
     <span class="kw">fn</span> <span class="ident">provide_extern</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">providers</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">query::Providers</span>) {
-        <span class="comment">// See comments in provide(), only this time we use the default *extern* provider.</span>
-        <span class="ident">providers</span>.<span class="ident">fn_sig</span> <span class="op">=</span> <span class="op">|</span><span class="ident">tcx</span>, <span class="ident">def_id</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> (<span class="ident">rustc_interface::DEFAULT_EXTERN_QUERY_PROVIDERS</span>.<span class="ident">fn_sig</span>)(<span class="ident">tcx</span>, <span class="ident">def_id</span>);
-            <span class="ident">result</span>.<span class="ident">map_bound</span>(<span class="op">|</span><span class="kw-2">mut</span> <span class="ident">inner</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Abi::C</span> { .. } <span class="op">=</span> <span class="ident">inner</span>.<span class="ident">abi</span> {
-                    <span class="ident">inner</span>.<span class="ident">abi</span> <span class="op">=</span> <span class="ident">Abi::Rust</span>;
-                }
-                <span class="ident">inner</span>
-            })
-        };
+        <span class="ident"><span class="kw">crate</span>::abi::provide_extern</span>(<span class="ident">providers</span>);
     }
 
     <span class="kw">fn</span> <span class="ident">codegen_crate</span>(
@@ -998,7 +936,7 @@
         <span class="ident">tcx</span>: <span class="ident">TyCtxt</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
         <span class="ident">metadata</span>: <span class="ident">EncodedMetadata</span>,
         <span class="ident">need_metadata_module</span>: <span class="ident">bool</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Any</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Any</span><span class="op">&gt;</span> {
         <span class="ident">Box::new</span>(<span class="ident">rustc_codegen_ssa::base::codegen_crate</span>(
             <span class="self">Self</span>,
             <span class="ident">tcx</span>,
@@ -1017,7 +955,7 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">ongoing_codegen</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Any</span><span class="op">&gt;</span>,
         <span class="ident">sess</span>: <span class="kw-2">&amp;</span><span class="ident">Session</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">CodegenResults</span>, <span class="ident">FxHashMap</span><span class="op">&lt;</span><span class="ident">WorkProductId</span>, <span class="ident">WorkProduct</span><span class="op">&gt;</span>), <span class="ident">ErrorReported</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">CodegenResults</span>, <span class="ident">FxHashMap</span><span class="op">&lt;</span><span class="ident">WorkProductId</span>, <span class="ident">WorkProduct</span><span class="op">&gt;</span>), <span class="ident">ErrorReported</span><span class="op">&gt;</span> {
         <span class="kw">let</span> (<span class="ident">codegen_results</span>, <span class="ident">work_products</span>) <span class="op">=</span> <span class="ident">ongoing_codegen</span>
             .<span class="ident">downcast</span>::<span class="op">&lt;</span><span class="ident">OngoingCodegen</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span>()
             .<span class="ident">expect</span>(<span class="string">&quot;Expected OngoingCodegen, found Box&lt;Any&gt;&quot;</span>)
@@ -1033,7 +971,7 @@
         <span class="ident">sess</span>: <span class="kw-2">&amp;</span><span class="ident">Session</span>,
         <span class="ident">codegen_results</span>: <span class="ident">CodegenResults</span>,
         <span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">OutputFilenames</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ErrorReported</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ErrorReported</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">timer</span> <span class="op">=</span> <span class="ident">sess</span>.<span class="ident">timer</span>(<span class="string">&quot;link_crate&quot;</span>);
         <span class="ident">link::link</span>(
             <span class="ident">sess</span>,
@@ -1060,7 +998,7 @@
         <span class="ident">_cgcx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenContext</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>,
         <span class="ident">_diag_handler</span>: <span class="kw-2">&amp;</span><span class="ident">Handler</span>,
         <span class="ident">_modules</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>, <span class="ident">FatalError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>, <span class="ident">FatalError</span><span class="op">&gt;</span> {
         <span class="macro">todo!</span>()
     }
 
@@ -1068,7 +1006,7 @@
         <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenContext</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>,
         <span class="kw">_</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FatLTOInput</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span>,
         <span class="kw">_</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">SerializedModule</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::ModuleBuffer</span><span class="op">&gt;</span>, <span class="ident">WorkProduct</span>)<span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">LtoModuleCodegen</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>, <span class="ident">FatalError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">LtoModuleCodegen</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>, <span class="ident">FatalError</span><span class="op">&gt;</span> {
         <span class="macro">todo!</span>()
     }
 
@@ -1076,7 +1014,7 @@
         <span class="ident">cgcx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenContext</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>,
         <span class="ident">modules</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">String</span>, <span class="ident"><span class="self">Self</span>::ThinBuffer</span>)<span class="op">&gt;</span>,
         <span class="ident">cached_modules</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">SerializedModule</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::ModuleBuffer</span><span class="op">&gt;</span>, <span class="ident">WorkProduct</span>)<span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LtoModuleCodegen</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">WorkProduct</span><span class="op">&gt;</span>), <span class="ident">FatalError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LtoModuleCodegen</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">WorkProduct</span><span class="op">&gt;</span>), <span class="ident">FatalError</span><span class="op">&gt;</span> {
         <span class="ident">link::run_thin</span>(<span class="ident">cgcx</span>, <span class="ident">modules</span>, <span class="ident">cached_modules</span>)
     }
 
@@ -1089,7 +1027,7 @@
         <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Handler</span>,
         <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>,
         <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">ModuleConfig</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">FatalError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">FatalError</span><span class="op">&gt;</span> {
         <span class="comment">// TODO: Implement</span>
         <span class="prelude-val">Ok</span>(())
     }
@@ -1097,7 +1035,7 @@
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">optimize_thin</span>(
         <span class="ident">_cgcx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenContext</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>,
         <span class="ident">thin_module</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ThinModule</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>, <span class="ident">FatalError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>, <span class="ident">FatalError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">module</span> <span class="op">=</span> <span class="ident">ModuleCodegen</span> {
             <span class="ident">module_llvm</span>: <span class="ident">spirv_tools::binary::to_binary</span>(<span class="ident">thin_module</span>.<span class="ident">data</span>())
                 .<span class="ident">unwrap</span>()
@@ -1113,7 +1051,7 @@
         <span class="ident">_diag_handler</span>: <span class="kw-2">&amp;</span><span class="ident">Handler</span>,
         <span class="ident">module</span>: <span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>,
         <span class="ident">_config</span>: <span class="kw-2">&amp;</span><span class="ident">ModuleConfig</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CompiledModule</span>, <span class="ident">FatalError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CompiledModule</span>, <span class="ident">FatalError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">cgcx</span>
             .<span class="ident">output_filenames</span>
             .<span class="ident">temp_path</span>(<span class="ident">OutputType::Object</span>, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">module</span>.<span class="ident">name</span>));
@@ -1132,11 +1070,11 @@
         })
     }
 
-    <span class="kw">fn</span> <span class="ident">prepare_thin</span>(<span class="ident">module</span>: <span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">String</span>, <span class="ident"><span class="self">Self</span>::ThinBuffer</span>) {
+    <span class="kw">fn</span> <span class="ident">prepare_thin</span>(<span class="ident">module</span>: <span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>) -&gt; (<span class="ident">String</span>, <span class="ident"><span class="self">Self</span>::ThinBuffer</span>) {
         (<span class="ident">module</span>.<span class="ident">name</span>, <span class="ident">SpirvThinBuffer</span>(<span class="ident">module</span>.<span class="ident">module_llvm</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">serialize_module</span>(<span class="ident">module</span>: <span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">String</span>, <span class="ident"><span class="self">Self</span>::ModuleBuffer</span>) {
+    <span class="kw">fn</span> <span class="ident">serialize_module</span>(<span class="ident">module</span>: <span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>) -&gt; (<span class="ident">String</span>, <span class="ident"><span class="self">Self</span>::ModuleBuffer</span>) {
         (<span class="ident">module</span>.<span class="ident">name</span>, <span class="ident">SpirvModuleBuffer</span>(<span class="ident">module</span>.<span class="ident">module_llvm</span>))
     }
 
@@ -1145,13 +1083,13 @@
         <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>,
         <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">ModuleConfig</span>,
         <span class="kw">_</span>: <span class="ident">bool</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">FatalError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">FatalError</span><span class="op">&gt;</span> {
         <span class="macro">todo!</span>()
     }
 }
 
 <span class="kw">impl</span> <span class="ident">ExtraBackendMethods</span> <span class="kw">for</span> <span class="ident">SpirvCodegenBackend</span> {
-    <span class="kw">fn</span> <span class="ident">new_metadata</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="ident">TyCtxt</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Module</span> {
+    <span class="kw">fn</span> <span class="ident">new_metadata</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="ident">TyCtxt</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident"><span class="self">Self</span>::Module</span> {
         <span class="ident"><span class="self">Self</span>::Module::new</span>()
     }
 
@@ -1168,6 +1106,7 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="kw">_</span>: <span class="ident">TyCtxt</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
         <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Module</span>,
+        <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="kw">_</span>: <span class="ident">AllocatorKind</span>,
         <span class="kw">_</span>: <span class="ident">bool</span>,
     ) {
@@ -1178,7 +1117,7 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">tcx</span>: <span class="ident">TyCtxt</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
         <span class="ident">cgu_name</span>: <span class="ident">Symbol</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>, <span class="ident">u64</span>) {
+    ) -&gt; (<span class="ident">ModuleCodegen</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Module</span><span class="op">&gt;</span>, <span class="ident">u64</span>) {
         <span class="kw">let</span> <span class="ident">_timer</span> <span class="op">=</span> <span class="ident">tcx</span>
             .<span class="ident">prof</span>
             .<span class="ident">extra_verbose_generic_activity</span>(<span class="string">&quot;codegen_module&quot;</span>, <span class="ident">cgu_name</span>.<span class="ident">to_string</span>());
@@ -1241,16 +1180,16 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Session</span>,
         <span class="kw">_</span>: <span class="ident">OptLevel</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Arc</span><span class="op">&lt;</span>(<span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">TargetMachineFactoryConfig</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">String</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>)<span class="op">&gt;</span>
+    ) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span>(<span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">TargetMachineFactoryConfig</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">String</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>)<span class="op">&gt;</span>
     {
         <span class="ident">Arc::new</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(()))
     }
 
-    <span class="kw">fn</span> <span class="ident">target_cpu</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">Session</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">str</span> {
+    <span class="kw">fn</span> <span class="ident">target_cpu</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">Session</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">str</span> {
         <span class="macro">todo!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">tune_cpu</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">Session</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">str</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">tune_cpu</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">Session</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">str</span><span class="op">&gt;</span> {
         <span class="prelude-val">None</span>
     }
 }
@@ -1273,7 +1212,7 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">get_env_dump_dir</span>(<span class="ident">env_var</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">get_env_dump_dir</span>(<span class="ident">env_var</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">std::env::var_os</span>(<span class="ident">env_var</span>) {
         <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="ident">path</span>);
         <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_file</span>() {
@@ -1288,7 +1227,7 @@
 
 <span class="doccomment">/// This is the entrypoint for a hot plugged `rustc_codegen_spirv`</span>
 <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">__rustc_codegen_backend</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">CodegenBackend</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">__rustc_codegen_backend</span>() -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">CodegenBackend</span><span class="op">&gt;</span> {
     <span class="comment">// Override rustc&#39;s panic hook with our own to override the ICE error</span>
     <span class="comment">// message, and direct people to `rust-gpu`.</span>
     <span class="kw">let</span> <span class="ident">_rustc_hook</span> <span class="op">=</span> <span class="ident">std::panic::take_hook</span>();
@@ -1333,7 +1272,7 @@
 
     <span class="ident">Box::new</span>(<span class="ident">SpirvCodegenBackend</span>)
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rustc_codegen_spirv" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>
