@@ -420,6 +420,7 @@ fn invoke_rustc(builder: &SpirvBuilder) -> Result<PathBuf, SpirvBuilderError> {
     let mut rustflags = vec![
         format!("-Zcodegen-backend={}", rustc_codegen_spirv.display()),
         "-Csymbol-mangling-version=v0".to_string(),
+        "-Zself-profile".to_string(),
     ];
 
     let mut llvm_args = vec![];
